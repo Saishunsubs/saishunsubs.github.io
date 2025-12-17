@@ -16,6 +16,8 @@ export default {
       fontFamily: {
         sans: ['Plus Jakarta Sans', 'sans-serif'],
         heading: ['Outfit', 'sans-serif'],
+        titillium: ['Titillium Web', 'sans-serif'],
+        poppins: ['Poppins', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",

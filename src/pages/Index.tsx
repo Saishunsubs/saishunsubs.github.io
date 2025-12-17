@@ -4,10 +4,11 @@ import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import PostCard from '@/components/PostCard';
 import Footer from '@/components/Footer';
-import { posts } from '@/data/posts';
+import { getLatestPosts } from '@/data/posts';
 
 const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const latestPosts = getLatestPosts(6);
 
   if (isLoading) {
     return <LoadingScreen onLoadComplete={() => setIsLoading(false)} />;
@@ -30,22 +31,30 @@ const Index = () => {
           </div>
 
           {/* Posts Grid - Full Width */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {posts.map((post, index) => (
-              <PostCard
-                key={post.id}
-                {...post}
-                delay={index * 100}
-              />
-            ))}
-          </div>
+          {latestPosts.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {latestPosts.map((post, index) => (
+                <PostCard
+                  key={post.id}
+                  {...post}
+                  delay={index * 100}
+                />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center text-muted-foreground py-12">
+              <p>Belum ada postingan.</p>
+            </div>
+          )}
           
           {/* Show More Button */}
-          <div className="mt-10 text-center">
-            <button className="btn-primary px-8 py-3 bg-primary text-primary-foreground font-semibold rounded-lg hover:bg-primary/90 transition-all">
-              Show More
-            </button>
-          </div>
+          {latestPosts.length > 0 && (
+            <div className="mt-10 text-center">
+              <button className="btn-primary px-8 py-3 bg-primary text-primary-foreground font-semibold rounded-lg hover:bg-primary/90 transition-all">
+                Show More
+              </button>
+            </div>
+          )}
         </div>
       </main>
 
