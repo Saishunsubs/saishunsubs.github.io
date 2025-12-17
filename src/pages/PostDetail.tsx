@@ -3,10 +3,11 @@ import { ArrowLeft, Calendar, User, Tag } from 'lucide-react';
 import Header from '@/components/Header';
 import Sidebar from '@/components/Sidebar';
 import Footer from '@/components/Footer';
-import { posts } from '@/data/posts';
+import { getAllPosts, generateSnippet } from '@/data/posts';
 
 const PostDetail = () => {
   const { id } = useParams();
+  const posts = getAllPosts();
   const post = posts.find((p) => p.id === id);
 
   if (!post) {
@@ -80,7 +81,7 @@ const PostDetail = () => {
                 ) : (
                   <div>
                     <p className="text-foreground/90 leading-relaxed mb-4">
-                      {post.snippet}
+                      {generateSnippet(post.content)}
                     </p>
                     <p className="text-muted-foreground italic">
                       Full translation coming soon...

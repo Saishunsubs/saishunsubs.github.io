@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { generateSnippet } from '@/data/posts';
 
 interface PostCardProps {
   id: string;
@@ -6,12 +7,13 @@ interface PostCardProps {
   author: string;
   date: string;
   tag: string;
-  snippet: string;
+  content: string;
   image: string;
   delay?: number;
 }
 
-const PostCard = ({ id, title, author, date, tag, snippet, image, delay = 0 }: PostCardProps) => {
+const PostCard = ({ id, title, author, date, tag, content, image, delay = 0 }: PostCardProps) => {
+  const snippet = generateSnippet(content);
   return (
     <article
       className="post-card bg-card rounded-lg overflow-hidden border border-border animate-zoom-in"
