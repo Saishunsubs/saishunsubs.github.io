@@ -34,7 +34,7 @@ const Hero = () => {
 
       {/* Content */}
       <div className="relative z-10 text-center px-4 animate-fade-in-up">
-        <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-foreground tracking-tight mb-4">
+        <h1 className="font-heading text-5xl md:text-7xl lg:text-8xl font-black text-foreground tracking-tight mb-4">
           SAISHUN SUBS
         </h1>
         <p className="text-lg md:text-xl lg:text-2xl text-foreground/90 font-medium">
