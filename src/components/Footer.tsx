@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import { Facebook, Twitter, Instagram, Youtube, Mail } from 'lucide-react';
+import { Facebook, Twitter, Instagram, Youtube, Mail, Github } from 'lucide-react';
+import { useAuth } from '@/hooks/useAuth';
 
 const fansubLinks = [
   { name: 'Runsubs', url: 'https://runsubs.blogspot.com/' },
@@ -11,6 +12,14 @@ const fansubLinks = [
 ];
 
 const Footer = () => {
+  const { user, isAdmin, signInWithGitHub } = useAuth();
+
+  const handleAdminClick = async () => {
+    if (!user) {
+      await signInWithGitHub();
+    }
+  };
+
   return (
     <footer className="bg-secondary border-t border-border">
       <div className="container py-12">
@@ -22,10 +31,28 @@ const Footer = () => {
               alt="Saishun Subs"
               className="h-12 w-auto mb-4"
             />
-            <p className="text-sm text-muted-foreground mb-4">
+            <p className="text-sm text-muted-foreground mb-2">
               Nyantai bikin subs, sambil belajar bahasa jepang.
             </p>
-            <div className="flex gap-3">
+            {/* Admin Login Button */}
+            {user && isAdmin ? (
+              <Link 
+                to="/admin/posts"
+                className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors"
+              >
+                <Github size={12} />
+                Admin Panel
+              </Link>
+            ) : (
+              <button 
+                onClick={handleAdminClick}
+                className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary transition-colors"
+              >
+                <Github size={12} />
+                Admin Login
+              </button>
+            )}
+            <div className="flex gap-3 mt-4">
               <a href="#" className="w-8 h-8 flex items-center justify-center rounded-full border border-border text-muted-foreground hover:text-primary hover:border-primary transition-colors">
                 <Facebook size={16} />
               </a>
